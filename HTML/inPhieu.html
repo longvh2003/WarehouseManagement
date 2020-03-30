@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>In phiếu</title>
+	<link rel="stylesheet" type="text/css" href="../Css/menu.css">
+	<link rel="stylesheet" type="text/css" href="../Css/inPhieu.css">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<script src="https://use.fontawesome.com/releases/v5.13.0/js/all.js"></script>
+</head>
+<body>
+	<div class="row logo">
+		<div class="col-2 logo-1">
+			<div><img src="../Image/logo.png" alt="logo"></div>
+			<div><button class="index-btn" onclick="window.location='trangChu.html'">Trang chủ</button></div>
+			<div><button class="index-btn" onclick="window.location='danhMuc.html'">Danh mục</button></div>
+			<div><button class="index-btn" onclick="window.location='nhapKho.html'">Nhập kho</button></div>
+			<div><button class="index-btn" onclick="window.location='xuatKho.html'">Xuất kho</button></div>
+			<div><button class="index-btn" onclick="window.location='inPhieu.html'">In phiếu</button></div>
+			<div><button class="index-btn" onclick="window.location='baoCao.html'">Báo cáo</button></div>
+		</div>
+		<div class="col-10 body-content">
+			<div class="header">
+				<span class="col-2"><i class="fas fa-user"></i>Xin chào, mrX</span>
+				<span class="col-1"><i class="fa fa-sign-in-alt"></i></span>
+			</div>
+			<div class="container">
+				<div class="row no-gutters content">
+					<div class="col-11"><button onclick="changeshow(-1)">Phiếu nhập</button><button onclick="changeshow(+1)">Phiếu xuất</button></div>
+					<div class="col-1"><button>In phiếu</button></div>
+				</div>
+				<div class="row group">
+					<div class="col-2 scontent2">
+						<div class="bold">Công ty ABC</div>
+						<div>Cầu giấy, Hà nội</div>
+					</div>
+					<div class="col-7">
+						<div class="bcontent bold">PHIẾU NHẬP KHO</div>
+						<div class="scontent">Ngày 20 tháng 3 năm 2020</div>
+					</div>
+					<div class="col-3 scontent">Số phiếu: <input type="text"></div>
+					<div class="col-1"></div>
+					<div class="col-2 scontent2">
+						<div>Họ tên người giao hàng: </div>
+						<div>Theo hóa đơn số: </div>
+						<div>Nhập tại kho: </div>
+					</div>
+					<div class="col-9 scontent2">
+						<div>.................................................................................................................</div>
+						<div>.................................................................................................................</div>
+						<div>.................................................................................................................</div>
+					</div>
+					<table class="table table-bordered table-hover">
+					  	<thead>
+					    	<tr>
+					     		<th scope="col">Mã vật tư</th>
+					      		<th scope="col">Tên vật tư</th>
+					      		<th scope="col">Serial</th>
+					      		<th scope="col">ĐVT</th>
+					      		<th scope="col">Số lượng</th>
+					      		<th scope="col">Đơn giá</th>
+					      		<th scope="col">Thành tiền</th>
+					    	</tr>
+					  	</thead>
+					  	<tbody>
+					    	<tr>
+					      		<th>...</th>
+					      		<td>...</td>
+					      		<td>...</td>
+					      		<td>...</td>
+					      		<td>...</td>
+					      		<td>...</td>
+					      		<td>...</td>
+					    	</tr>
+					  	</tbody>
+					</table>
+				</div>
+				<div class="row group">
+					<div class="col-2 scontent2">
+						<div class="bold">Công ty ABC</div>
+						<div>Cầu giấy, Hà nội</div>
+					</div>
+					<div class="col-7">
+						<div class="bcontent bold">PHIẾU XUẤT KHO</div>
+						<div class="scontent">Ngày 20 tháng 3 năm 2020</div>
+					</div>
+					<div class="col-3 scontent">Số phiếu: <input type="text"></div>
+					<div class="col-1"></div>
+					<div class="col-2 scontent2">
+						<div>Họ tên người giao hàng: </div>
+						<div>Theo hóa đơn số: </div>
+						<div>Xuất tại kho: </div>
+					</div>
+					<div class="col-9 scontent2">
+						<div>.................................................................................................................</div>
+						<div>.................................................................................................................</div>
+						<div>.................................................................................................................</div>
+					</div>
+					<table class="table table-bordered table-hover">
+					  	<thead>
+					    	<tr>
+					     		<th scope="col">Mã vật tư</th>
+					      		<th scope="col">Tên vật tư</th>
+					      		<th scope="col">Serial</th>
+					      		<th scope="col">ĐVT</th>
+					      		<th scope="col">Số lượng</th>
+					      		<th scope="col">Đơn giá</th>
+					      		<th scope="col">Thành tiền</th>
+					    	</tr>
+					  	</thead>
+					  	<tbody>
+					    	<tr>
+					      		<th>...</th>
+					      		<td>...</td>
+					      		<td>...</td>
+					      		<td>...</td>
+					      		<td>...</td>
+					      		<td>...</td>
+					      		<td>...</td>
+					    	</tr>
+					  	</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+		var index = 1;
+		show(index);
+		function changeshow(n){
+			show(index += n);
+		}
+		function show(n){
+			let i;
+			var x = document.getElementsByClassName('group');
+			if(n>x.length) index=2;
+			if(n<1) index=1;
+			for(i=0;i<x.length;i++){
+				x[i].style.display = "none";
+			}
+			x[index-1].style.display = "flex";
+		}
+	</script>
+</body>
+</html>

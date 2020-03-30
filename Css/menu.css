@@ -1,0 +1,32 @@
+.logo{
+	margin-right:0 !important;
+}
+.logo-1{
+	border: 1px solid black;
+	padding-right:1px !important;
+	height: 660px;
+}
+.logo img{
+	width: 100%;
+}
+.index-btn{
+	text-align: center;
+	border: 1px solid black;
+	margin-bottom: 1px;
+	padding: 10px 0;
+	width: 100%;
+	font-weight: bold;
+	background-color: #74b9ff;
+}
+.index-btn:hover{
+	color: #d63031;
+}
+.body-content{
+	padding: 0 !important;
+	
+}
+.header{
+	text-align: right;
+	border: 1px solid black;
+	padding: 10px 20px;
+}
