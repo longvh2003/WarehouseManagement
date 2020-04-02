@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Lịch sử thao tác</title>
+	<link rel="stylesheet" type="text/css" href="../Css/menu.css">
+	<link rel="stylesheet" type="text/css" href="../Css/inPhieu.css">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<script src="https://use.fontawesome.com/releases/v5.13.0/js/all.js"></script>
+</head>
+<body>
+	<div class="row logo">
+		<div class="col-2 logo-1">
+			<div><img src="../Image/logo.png" alt="logo"></div>
+			<div><button class="index-btn" onclick="window.location='danhMuc'">Danh mục</button></div>
+			<div><button class="index-btn" onclick="window.location='lichSu'">Lịch sử thao tác</button></div>
+			<div><button class="index-btn" onclick="window.location='baoCao'">Báo cáo</button></div>
+		</div>
+		<div class="col-10 body-content">
+			<div class="header">
+				<span class="col-2"><i class="fas fa-user"></i>Xin chào, mrX</span>
+				<span class="col-1"><i class="fa fa-sign-in-alt"></i></span>
+			</div>
+			<div class="container">
+				<div class="row">
+					<div class="col-10 content">Lịch sử</div>
+					<div class="col-2 btn">
+					</div>
+				</div>
+			</div>
+			<table class="table table-bordered table-hover">
+			  	<thead>
+			    	<tr>
+			     		<th scope="col">Tên</th>
+			      		<th scope="col">Thương hiệu</th>
+			      		<th scope="col">Phân loại</th>
+			      		<th scope="col">Serial</th>
+			      		<th scope="col">ĐVT</th>
+			      		<th scope="col">Nghiệp vụ</th>
+			      		<th scope="col">Thời gian</th>
+			      		<th scope="col">Thao tác</th>
+			    	</tr>
+			  	</thead>
+			  	<tbody>
+			    	<%for(var i=0 ; i < data_ejs.length ; i++){%>
+						<tr>
+							<td style="display: none;" id="_id" ><%= data_ejs[i]._id %></td>
+							<td id="name"><%= data_ejs[i].name %></td>
+							<td id="trademark"><%= data_ejs[i].trademark %></td>
+							<td id="kind"><%= data_ejs[i].kind %></td>
+							<td id="serial"><%= data_ejs[i].serial %></td>
+							<td id="amount"><%= data_ejs[i].amount %></td>
+							<td id="action"><%= data_ejs[i].action %></td>
+							<td id="time"><%= data_ejs[i].time %></td>
+							<td>
+								  <button type="button" class="btn btn-dark print" data-toggle="modal" data-target="#print_modal">
+									<i class="fas fa-print"></i>
+								  </button>
+								<button class="btn btn-danger delete" id="delete"><i class="fas fa-trash-alt"></i></button>
+							</td>
+						</tr>
+					<%}%>
+			  	</tbody>
+			</table>
+		</div>
+	</div>
+
+<!-- Modal In phiếu lịch sử thao tác-->
+<div class="modal fade " id="print_modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+			  <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+			  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			  </button>
+			</div>
+			<div class="modal-body print_body" id="print_body"> 
+			</div>
+			<div class="modal-footer">
+			  <button type="button" class="btn btn-secondary" data-dismiss="modal" id="cancel">Hủy</button>
+			  <button type="button" class="btn btn-primary" onclick="myPrint('print_body')" id="confirm_print">Xác nhận</button>
+			</div>
+		  </div>
+	  <!-- <div class="modal-content print_body">
+		<button type="button" class="btn btn-danger" id="print" data-dismiss="modal">Xác nhận</button>
+	  </div> -->
+	</div>
+	
+  </div>
+
+	<!-- <script type="text/javascript">
+		var index = 1;
+		show(index);
+		function changeshow(n){
+			show(index += n);
+		}
+		function show(n){
+			let i;
+			var x = document.getElementsByClassName('group');
+			if(n>x.length) index=2;
+			if(n<1) index=1;
+			for(i=0;i<x.length;i++){
+				x[i].style.display = "none";
+			}
+			x[index-1].style.display = "flex";
+		}
+	</script> -->
+	<script src="../Js/vendor/jquery-3.4.1.min.js"></script>
+	<script src="../Js/vendor/all.min.js"></script>
+	<script src="../Js/vendor/bootstrap.min.js"></script>
+	<script src="../Js/Ajax/lichSu_ajax.js"></script>
+</body>
+</html>
+

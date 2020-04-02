@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Danh mục</title>
+	<link rel="stylesheet" type="text/css" href="../Css/menu.css">
+	<link rel="stylesheet" type="text/css" href="../Css/danhMuc.css">
+	<link rel="stylesheet" type="text/css" href="../Css/nhapKho.css">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<script src="https://use.fontawesome.com/releases/v5.13.0/js/all.js"></script>
+</head>
+<body>
+	<div class="row logo">
+		<div class="col-2 logo-1">
+			<div><img src="../Image/logo.png" alt="logo"></div>
+			<div><button class="index-btn" onclick="window.location='danhMuc'">Danh mục</button></div>
+			<div><button class="index-btn" onclick="window.location='lichSu'">Lịch sử thao tác</button></div>
+			<div><button class="index-btn" onclick="window.location='baoCao'">Báo cáo</button></div>
+		</div>
+		<div class="col-10 body-content">
+			<div class="header">
+				<span class="col-2"><i class="fas fa-user"></i>Xin chào, mrX</span>
+				<span class="col-1"><i class="fa fa-sign-in-alt"></i></span>
+			</div>
+			<div class="container">
+				<div class="row">
+					<div class="col-10 content">Danh mục</div>
+					<div class="col-2 btn btn_nhapxuat">
+						<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#nhapKho">
+							Nhập kho
+						  </button>
+						  <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#xuatKho">
+							Xuất kho
+						  </button>
+					</div>
+				</div>
+			</div>
+			<table class="table table-bordered table-hover">
+			  	<thead>
+			    	<tr>
+			     		<th scope="col">Mã vật tư</th>
+			     		<th scope="col">Tên</th>
+			      		<th scope="col">Thương hiệu</th>
+			      		<th scope="col">Phân loại</th>
+			      		<th scope="col">Serial</th>
+			      		<th scope="col">ĐVT</th>
+			      		<th scope="col">Số lượng</th>
+			      		<th scope="col">Ghi chú</th>
+			      		<th scope="col">Thao tác</th>
+			    	</tr>
+			  	</thead>
+			  	<tbody>
+			    	<%for(var i=0 ; i < data_ejs.length ; i++){%>
+						<tr>
+							<td id="_id"><%= data_ejs[i]._id %></td>
+							<td id="name"><%= data_ejs[i].name %></td>
+							<td id="trademark"><%= data_ejs[i].trademark %></td>
+							<td id="kind"><%= data_ejs[i].kind %></td>
+							<td id="serial"><%= data_ejs[i].serial %></td>
+							<td id="amount"><%= data_ejs[i].amount %></td>
+							<td id="unit"><%= data_ejs[i].unit %></td>
+							<td id="note"><%= data_ejs[i].note %></td>
+							<td>
+								<button class="btn btn-success" data-toggle="modal" data-target="#update_modal" id="update">
+									<i class="fas fa-edit"></i>
+								  </button>
+								<button class="btn btn-danger" id="delete"><i class="fas fa-trash-alt"></i></button>
+							</td>
+						</tr>
+					<%}%>
+			  	</tbody>
+			</table>
+		</div>
+	</div>
+
+	<!-- Modal thao tác nhập kho-->
+	<div class="modal fade" id="nhapKho" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+		  <div class="modal-content">
+			<div class="modal-header">
+			  <h5 class="modal-title" id="exampleModalLabel">Chọn thao tác nhập</h5>
+			  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			  </button>
+			</div>
+			<div class="modal-body">
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#nhapThuCong">
+					Nhập thủ công
+				  </button>
+				  <button type="button" class="btn btn-success" data-toggle="modal" data-target="#nhapExcel">
+					Nhập bằng excel
+				  </button>
+			</div>	
+			<div class="modal-footer">
+			  <button type="button" class="btn btn-danger" id="" data-dismiss="modal">Hủy</button>
+			</div>
+		  </div>
+		</div>
+	  </div>
+
+
+
+
+	<!-- Modal nhập kho thủ công -->
+<div class="modal fade" id="nhapThuCong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+	  <div class="modal-content">
+		<div class="modal-header">
+		  <h5 class="modal-title" id="exampleModalLabel">Nhập thủ công</h5>
+		  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		  </button>
+		</div>
+		<div class="modal-body">
+		  <form action="" method="post" id="form_nhap">
+			  <label>Tên: </label><input type="text" name="name_form" id="name_form">
+			  <label>Thương hiệu: </label><input type="text" name="trademark_form" id="trademark_form">
+			  <label>Phân loại: </label><input type="text" name="kind_form" id="kind_form">
+			  <label>Serial: </label><input type="text" name="serial_form" id="serial_form">
+			  <label>Số lượng: </label><input type="text" name="amount_form" id="amount_form">
+			  <label>Đơn vị: </label><input type="text" name="unit_form" id="unit_form">
+			  <label>Ghi chú: </label><input type="text" name="note_form" id="note_form">
+		</div>
+		<div class="modal-footer">
+		  <button class="btn btn-primary" type="submit" >Xác nhận</button>
+		  <button type="button" class="btn btn-danger" data-dismiss="modal">Hủy</button>
+		</form>
+		</div>
+	  </div>
+	</div>
+  </div>
+
+   <!-- Modal xuất bằng excel-->
+	<div class="modal fade" id="nhapExcel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+		  <div class="modal-content">
+			<div class="modal-header">
+			  <h5 class="modal-title" id="exampleModalLabel">Nhập bằng Excel</h5>
+			  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			  </button>
+			</div>
+			<div class="modal-body">
+				<form  id="nhap_excel" method="POST"  enctype="multipart/form-data">
+					<input type="file" name="ip_nhap_excel" id="ip_nhap_excel">
+				</form>
+			</div>	
+			<div class="modal-footer">
+			  <button class="btn btn-primary" id="submit_nhap_excel">Xác nhận</button>
+			  <button type="button" class="btn btn-danger" data-dismiss="modal">Hủy</button>
+			</div>
+		  </div>
+		</div>
+	  </div>
+
+	<!-- Modal cập nhật thông tin-->
+	<div class="modal fade" id="update_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+		  <div class="modal-content">
+			<div class="modal-header">
+			  <h5 class="modal-title" id="exampleModalLabel">Cập nhật</h5>
+			  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			  </button>
+			</div>
+			<div class="modal-body">
+			  <form id="form_update">
+			</form>
+			</div>	
+			<div class="modal-footer">
+			  <button class="btn btn-primary" id="update_submit"  >Xác nhận</button>
+			  <button type="button" class="btn btn-danger" id="cancel" data-dismiss="modal">Hủy</button>
+			</div>
+		  </div>
+		</div>
+	  </div>
+	  
+	  <!-- Modal thao tác xuất kho-->
+	<div class="modal fade" id="xuatKho" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+		  <div class="modal-content">
+			<div class="modal-header">
+			  <h5 class="modal-title" id="exampleModalLabel">Chọn thao tác xuất</h5>
+			  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			  </button>
+			</div>
+			<div class="modal-body">
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#xuatThuCong">
+					Xuất thủ công
+				  </button>
+				  <button type="button" class="btn btn-success" data-toggle="modal" data-target="#xuatExcel">
+					Xuất bằng excel
+				  </button>
+			</div>	
+			<div class="modal-footer">
+			  <button type="button" class="btn btn-danger" id="cancel" data-dismiss="modal">Hủy</button>
+			</div>
+		  </div>
+		</div>
+	  </div>
+
+
+	  <!-- Modal xuất thủ công -->
+<div class="modal fade" id="xuatThuCong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+	  <div class="modal-content">
+		<div class="modal-header">
+		  <h5 class="modal-title" id="exampleModalLabel">Xuất thủ công</h5>
+		  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		  </button>
+		</div>
+		<div class="modal-body">
+		  <form id="form_xuatThuCong">
+			  <label>Mã: </label><input type="text" name="_id_xuatThuCong" id="_id_xuatThuCong">
+			  <label>Tên: </label><input type="text" name="name_xuatThuCong" id="name_xuatThuCong">
+			  <label>Thương hiệu: </label><input type="text" name="trademark_xuatThuCong" id="trademark_xuatThuCong">
+			  <label>Phân loại: </label><input type="text" name="kind_xuatThuCong" id="kind_xuatThuCong">
+			  <label>Serial: </label><input type="text" name="serial_xuatThuCong" id="serial_xuatThuCong">
+			  <label>Số lượng: </label><input type="text" name="amount_xuatThuCong" id="amount_xuatThuCong">
+			  <label>Đơn vị: </label><input type="text" name="unit_xuatThuCong" id="unit_xuatThuCong">
+			  <label>Ghi chú: </label><input type="text" name="note_xuatThuCong" id="note_xuatThuCong">
+			</form>
+
+		</div>
+		<div class="modal-footer">
+		  <button class="btn btn-primary" id="submit_xuatThuCong">Xác nhận</button>
+		  <button type="button" class="btn btn-danger" data-dismiss="modal">Hủy</button>
+
+		</div>
+	  </div>
+	</div>
+  </div>
+
+
+  <!-- Modal xuất bằng excel-->
+	<div class="modal fade" id="xuatExcel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+		  <div class="modal-content">
+			<div class="modal-header">
+			  <h5 class="modal-title" id="exampleModalLabel">Xuất bằng Excel</h5>
+			  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			  </button>
+			</div>
+			<div class="modal-body">
+				<form  id="xuat_excel" method="POST"  enctype="multipart/form-data">
+					<input type="file" name="ip_xuat_excel" id="ip_xuat_excel">
+				</form>
+			</div>	
+			<div class="modal-footer">
+			  <button class="btn btn-primary" id="submit_xuat_excel"  >Xác nhận</button>
+			  <button type="button" class="btn btn-danger" id="" data-dismiss="modal">Hủy</button>
+			</div>
+		  </div>
+		</div>
+	  </div>
+
+<script src="../Js/vendor/jquery-3.4.1.min.js"></script>
+<script src="../Js/vendor/all.min.js"></script>
+<script src="../Js/vendor/bootstrap.min.js"></script>
+<script src="../Js/Ajax/danhMuc_ajax.js"></script>
+</body>
+</html>

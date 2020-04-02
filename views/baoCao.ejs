@@ -10,12 +10,9 @@
 	<div class="row logo">
 		<div class="col-2 logo-1">
 			<div><img src="../Image/logo.png" alt="logo"></div>
-			<div><button class="index-btn" onclick="window.location='trangChu.html'">Trang chủ</button></div>
-			<div><button class="index-btn" onclick="window.location='danhMuc.html'">Danh mục</button></div>
-			<div><button class="index-btn" onclick="window.location='nhapKho.html'">Nhập kho</button></div>
-			<div><button class="index-btn" onclick="window.location='xuatKho.html'">Xuất kho</button></div>
-			<div><button class="index-btn" onclick="window.location='inPhieu.html'">In phiếu</button></div>
-			<div><button class="index-btn" onclick="window.location='baoCao.html'">Báo cáo</button></div>
+			<div><button class="index-btn" onclick="window.location='danhMuc'">Danh mục</button></div>
+			<div><button class="index-btn" onclick="window.location='lichSu'">Lịch sử thao tác</button></div>
+			<div><button class="index-btn" onclick="window.location='baoCao'">Báo cáo</button></div>
 		</div>
 		<div class="col-10 body-content">
 			<div class="header">
@@ -42,15 +39,20 @@
 			    	</tr>
 			  	</thead>
 			  	<tbody>
-			    	<tr>
-			      		<th scope="row">...</th>
-			      		<td>...</td>
-			      		<td>...</td>
-			      		<td>...</td>
-			      		<td>...</td>
-			      		<td>...</td>
-			      		<td>...</td>
-			    	</tr>
+			    	<%for(var i=0 ; i < data_ejs.length ; i++){%>
+						<tr>
+							<td><%= data_ejs[i]._id %></td>
+							<td><%= data_ejs[i].name %></td>
+							<td><%= data_ejs[i].serial %></td>
+							<td><%= data_ejs[i].amount %></td>
+							<td><%= data_ejs[i].unit %></td>
+							<td><%= data_ejs[i].note %></td>
+							<td>
+								<button class="btn btn-success" id="update"><i class="fas fa-edit"></i></button>
+								<button class="btn btn-danger" id="delete"><i class="fas fa-trash-alt"></i></button>
+							</td>
+						</tr>
+					<%}%>
 			  	</tbody>
 			</table>
 		</div>
