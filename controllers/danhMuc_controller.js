@@ -1,15 +1,26 @@
 // require model
 var hangHoa = require('../models/hangHoa_model');
 var lichSu = require('../models/lichSu_model');
+var users = require('../models/users_model');
 // require npm
 var multer = require('multer');
 var xlsx = require('mongo-xlsx');
+var moment = require('moment');
+var jwt = require('jsonwebtoken');
 module.exports.Open = function (req, res) {
+
+    var jwtToken = req.cookies.jwt_code;
+    var jwtDecode = jwt.verify(jwtToken, 'hoanganh');
+    var _id = jwtDecode._id;
     hangHoa.find({}, function (err, data) {
         if (err) throw err;
-        else {
-            res.render('./danhMuc', { data_ejs: data });
-        }
+        users.findOne({_id:_id},function(err,data1){
+            if(err) throw err;
+            res.render('danhMuc',{
+                data_ejs : data,
+                todo1 : data1
+            })
+        })
     })
 }
 
@@ -25,8 +36,9 @@ module.exports.Insert = function (req, res) {
     var action = "Nhập kho";
     var today = new Date();
     var date = today.getDate() + '-' + (today.getMonth() + 1) + '-' + today.getFullYear();
+    var dateNew = new Date(date);
+    var momentDate = moment(dateNew).format('YYYY-MM-DD');
     var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-    var dateTime = date + ' ' + time;
     hangHoa.findOne({
         kind: kind,
         trademark: trademark,
@@ -56,7 +68,8 @@ module.exports.Insert = function (req, res) {
                         amount: amount,
                         unit: unit,
                         note: note,
-                        time: dateTime,
+                        date: momentDate,
+                        time: time,
                         action: action
                     });
                     res.send('success');
@@ -83,7 +96,6 @@ module.exports.Delete = function (req, res) {
     var today = new Date();
     var date = today.getDate() + '-' + (today.getMonth() + 1) + '-' + today.getFullYear();
     var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-    var dateTime = date + ' ' + time;
     hangHoa.findOne({
         _id: _id
     }).remove(function (err, data) {
@@ -98,7 +110,8 @@ module.exports.Delete = function (req, res) {
                 amount: amount,
                 unit: unit,
                 note: note,
-                time: dateTime,
+                time: time,
+                date: date,
                 action: action
             });
             res.send('success');
@@ -152,7 +165,8 @@ module.exports.Update = function (req, res) {
                 amount: amount_old,
                 unit: unit_old,
                 note: note_old,
-                time: dateTime,
+                time: time,
+                date: date,
                 action: action
             });
             res.send('success');
@@ -203,7 +217,8 @@ module.exports.Export_Hand_Made = function (req, res) {
                         amount: amount_xuat,
                         unit: unit,
                         note: note,
-                        time: dateTime,
+                        time: time,
+                        date : date,
                         action: action
                     });
                     res.send('success');
@@ -228,7 +243,7 @@ module.exports.upload_nhap = multer({ storage: storage_nhap });
 module.exports.Nhap_excel = function (req, res) {
     var name = req.params.name;
 
-    var action = "Nhập excel";
+    var action = "Nhập kho";
     var today = new Date();
     var date = today.getDate() + '-' + (today.getMonth() + 1) + '-' + today.getFullYear();
     var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
@@ -263,7 +278,8 @@ module.exports.Nhap_excel = function (req, res) {
                         amount: data[0].amount,
                         unit: unit,
                         note: note,
-                        time: dateTime,
+                        time: time,
+                        date : date,
                         action: action
                     });
                 }
@@ -289,7 +305,7 @@ module.exports.upload_xuat = multer({ storage: storage_xuat });
 module.exports.Xuat_excel = function (req, res) {
     var name = req.params.name;
 
-    var action = "Xuất excel";
+    var action = "Xuất kho";
     var today = new Date();
     var date = today.getDate() + '-' + (today.getMonth() + 1) + '-' + today.getFullYear();
     var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
@@ -318,7 +334,8 @@ module.exports.Xuat_excel = function (req, res) {
                                 amount: amount_good,
                                 unit: data.unit,
                                 note: data.note,
-                                time: dateTime,
+                                time: time,
+                                data : date,
                                 action: action
                             });
                         }

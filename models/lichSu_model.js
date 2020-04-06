@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-
+var moment = require('moment');
 mongoose.connect('mongodb://localhost/WM_database');
 
 var lichSu_Schema = mongoose.Schema({
@@ -12,6 +12,10 @@ var lichSu_Schema = mongoose.Schema({
     amount : Number,
     unit : String,
     note : String,
+    date:{
+        type: Date,
+        default: Date.now 
+    },
     time : String,
     action : String
 });

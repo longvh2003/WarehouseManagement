@@ -237,4 +237,20 @@ $(document).ready(function () {
             }
         })
     })
+    $('#logout').on('click',function(e){
+        e.preventDefault();
+        $.ajax({
+            url : 'dangNhap/logout',
+            type : "POST",
+            success : function(datas){
+                if(datas=='success'){
+                    window.location.replace('/dangNhap');
+                }
+                else{
+                    alert("Hệ thống chưa thực hiện được yêu cầu của bạn!");
+                }
+            }
+        })
+    })
+    
 })

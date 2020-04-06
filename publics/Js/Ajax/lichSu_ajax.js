@@ -43,7 +43,7 @@ $(document).ready(function(){
 						<div class="bcontent bold">PHIẾU XUẤT KHO</div>\
 						<div class="scontent">Ngày '+ dateTime.getDate() +' tháng '+ (dateTime.getMonth() + 1) +' năm '+ dateTime.getFullYear() +'</div>\
 					</div>\
-					<div class="col-3 scontent">Số phiếu: <input type="text" value="'+ datas._id +'"></div>\
+					<div class="col-3 scontent">Số phiếu: <input type="text" value="'+ datas._id +'" size="23"></div>\
 					<div class="col-1"></div>\
 					<div class="col-2 scontent2">\
 						<div>Họ tên: </div>\
@@ -94,6 +94,21 @@ $(document).ready(function(){
         });
         $('#confirm_print').on('click',function(){
             location.reload();
+        })
+    })
+    $('#logout').on('click',function(e){
+        e.preventDefault();
+        $.ajax({
+            url : 'dangNhap/logout',
+            type : "POST",
+            success : function(datas){
+                if(datas=='success'){
+                    window.location.replace('/dangNhap');
+                }
+                else{
+                    alert("Hệ thống chưa thực hiện được yêu cầu của bạn!");
+                }
+            }
         })
     })
 })

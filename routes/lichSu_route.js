@@ -2,8 +2,10 @@ var express = require('express');
 var route = express.Router();
 
 var controller = require('../controllers/lichSu_controller');
+var auth_controller = require('../controllers/auth_controller');
 
-route.get('/',controller.Open);
+
+route.get('/',auth_controller.Auth,controller.Open);
 
 route.delete('/:_id',controller.Delete);
 

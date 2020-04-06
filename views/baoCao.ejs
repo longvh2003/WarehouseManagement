@@ -10,52 +10,82 @@
 	<div class="row logo">
 		<div class="col-2 logo-1">
 			<div><img src="../Image/logo.png" alt="logo"></div>
-			<div><button class="index-btn" onclick="window.location='danhMuc'">Danh mục</button></div>
+			<div><button class="index-btn" onclick="window.location='danhMuc'" id="danhmuc">Danh mục</button></div>
 			<div><button class="index-btn" onclick="window.location='lichSu'">Lịch sử thao tác</button></div>
 			<div><button class="index-btn" onclick="window.location='baoCao'">Báo cáo</button></div>
 		</div>
 		<div class="col-10 body-content">
 			<div class="header">
-				<span class="col-2"><i class="fas fa-user"></i>Xin chào, mrX</span>
-				<span class="col-1"><i class="fa fa-sign-in-alt"></i></span>
+				<span class="col-2"><i class="fas fa-user"></i>Xin chào, <%=todo.username%></span>
+				<span class="col-1"><button class="btn btn-danger" id="logout"><i class="fa fa-sign-in-alt"></i></button></span>
 			</div>
+			<br>
 			<div class="container">
-				<div class="row">
-					<div class="col-12 bcontent blue">Báo cáo bán hàng</div>
-					<div class="col-6 scontent blue">Từ ngày: <input type="text"></div>
-					<div class="col-6 scontent blue">Đến ngày: <input type="text"></div>
-				</div>
+					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#baoCao_modal">
+						Báo cáo
+					  </button>
+					<!-- <button type="submit" class="btn btn-success" id="exportExcel" >
+						In Phiếu
+					  </button> -->
+					  <form action="/baoCao/export" method="POST">
+           					 <button class="btn btn-success" type="submit">Export To Excel</button>
+            			</form>
 			</div>
+			<br>
 			<table class="table table-bordered table-hover">
 			  	<thead>
 			    	<tr>
-			     		<th scope="col">Mã vật tư</th>
 			      		<th scope="col">Tên vật tư</th>
+			      		<th scope="col">Thương hiệu</th>
+			      		<th scope="col">Phân loại</th>
 			      		<th scope="col">Serial</th>
-			      		<th scope="col">ĐVT</th>
 			      		<th scope="col">Số lượng</th>
-			      		<th scope="col">Đơn giá</th>
-			      		<th scope="col">Thành tiền</th>
+			      		<th scope="col">ĐVT</th>
+			      		<th scope="col">Ghi chú</th>
 			    	</tr>
 			  	</thead>
 			  	<tbody>
-			    	<%for(var i=0 ; i < data_ejs.length ; i++){%>
-						<tr>
-							<td><%= data_ejs[i]._id %></td>
-							<td><%= data_ejs[i].name %></td>
-							<td><%= data_ejs[i].serial %></td>
-							<td><%= data_ejs[i].amount %></td>
-							<td><%= data_ejs[i].unit %></td>
-							<td><%= data_ejs[i].note %></td>
-							<td>
-								<button class="btn btn-success" id="update"><i class="fas fa-edit"></i></button>
-								<button class="btn btn-danger" id="delete"><i class="fas fa-trash-alt"></i></button>
-							</td>
-						</tr>
-					<%}%>
+			    	
 			  	</tbody>
 			</table>
 		</div>
 	</div>
+	<!-- Modal In phiếu lịch sử thao tác-->
+<div class="modal fade " id="baoCao_modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+			  <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+			  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			  </button>
+			</div>
+			<div class="modal-body"> 
+				<label>Từ ngày : </label><input type="text" name="startTime" id="startTime" maxlength="10" placeholder="VD: 1-2-2020">
+				<label>Đến ngày : </label><input type="text" name="finishTime" id="finishTime" maxlength="10" placeholder="VD: 3-2-2020">
+				<label>Tác vụ : </label><select name="action" id="action">
+					<option value="Nhập kho">Nhập kho</option>
+					<option value="Xuất kho">Xuất kho</option>
+					<option value="Xoá">Xóa</option>
+					<option value="Cập nhật">Cập nhật</option>
+				</select>
+			</div>
+			<div class="modal-footer">
+			  <button type="button" class="btn btn-secondary" data-dismiss="modal" id="cancel">Hủy</button>
+			  <button type="button" class="btn btn-primary" id="baoCao_confirm">Xác nhận</button>
+			</div>
+		  </div>
+	  <!-- <div class="modal-content print_body">
+		<button type="button" class="btn btn-danger" id="print" data-dismiss="modal">Xác nhận</button>
+	  </div> -->
+	</div>
+	
+	
+  </div>
+  </div>
+	<script src="../Js/vendor/jquery-3.4.1.min.js"></script>
+	<script src="../Js/vendor/all.min.js"></script>
+	<script src="../Js/vendor/bootstrap.min.js"></script>
+	<script src="../Js/Ajax/baoCao_ajax.js"></script>
 </body>
 </html>
