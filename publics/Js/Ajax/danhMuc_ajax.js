@@ -198,7 +198,7 @@ $(document).ready(function () {
             contentType : false,
             success : function(datas){
                 if(datas == 'success'){
-                    console.log('upload success!');
+                    alert('Nhập kho thành công');
                     location.reload();
                 }
                 
@@ -230,7 +230,7 @@ $(document).ready(function () {
             crossDomain : true,
             success : function(datas){
                 if(datas == 'success'){
-                    console.log('upload success!');
+                    alert('Hoàn thành!');
                     location.reload();
                 }
                 

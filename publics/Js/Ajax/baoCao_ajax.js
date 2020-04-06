@@ -21,6 +21,11 @@ $(document).ready(function () {
                     alert('Không tìm thấy dữ liệu phù hợp!');
                 }
                 else {
+                    $('#form_export').append('\
+                        <input value="'+startTime+'" name="startTime_ex" style="display: none;">\
+                        <input value="'+finishTime+'" name="finishTime_ex" style="display: none;">\
+                        <input value="'+actione+'" name="action_ex" style="display: none;">\
+                    ')
                     datas.forEach(element => {
                         $('tbody').append('\
                                 <tr>\
@@ -50,14 +55,11 @@ $(document).ready(function () {
             finishTime: finishTime,
             action: actione
         }
-        var dateTime = new Date();
-        console.log(todo);
         $.ajax({
             url: '/baoCao/export',
             type: "POST",
             data: todo,
-            success: function (datas) {
-
+            success: function (datas){
             }
         })
     })

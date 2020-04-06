@@ -316,6 +316,9 @@ module.exports.Xuat_excel = function (req, res) {
             var amount_good = element.amount;
             hangHoa.findOne({_id:_id_goods},function(err,data){
                 if(err) throw err;
+                if(data==null){
+                    console.log('bo qua de');
+                }
                 else{
                     hangHoa.updateOne({_id:_id_goods},{
                         $set: {
@@ -339,6 +342,7 @@ module.exports.Xuat_excel = function (req, res) {
                                 action: action
                             });
                         }
+                        
                     })
                 }
             })

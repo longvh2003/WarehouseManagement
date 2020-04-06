@@ -3,7 +3,6 @@ var jwt = require('jsonwebtoken');
 
 module.exports.Auth = function (req, res, next) {
     var cookies = req.cookies;
-    console.log(cookies.jwt_code);
     if (cookies.jwt_code != undefined) {
         var decode = jwt.verify(cookies.jwt_code, 'hoanganh');
         var _id = decode._id;

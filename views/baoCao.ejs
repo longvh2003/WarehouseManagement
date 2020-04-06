@@ -3,6 +3,7 @@
 <head>
 	<link rel="stylesheet" type="text/css" href="../Css/menu.css">
 	<link rel="stylesheet" type="text/css" href="../Css/baoCao.css">
+	<title>Báo cáo</title>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 	<script src="https://use.fontawesome.com/releases/v5.13.0/js/all.js"></script>
 </head>
@@ -10,7 +11,7 @@
 	<div class="row logo">
 		<div class="col-2 logo-1">
 			<div><img src="../Image/logo.png" alt="logo"></div>
-			<div><button class="index-btn" onclick="window.location='danhMuc'" id="danhmuc">Danh mục</button></div>
+			<div><button class="index-btn" onclick="window.location='danhMuc'" >Danh mục</button></div>
 			<div><button class="index-btn" onclick="window.location='lichSu'">Lịch sử thao tác</button></div>
 			<div><button class="index-btn" onclick="window.location='baoCao'">Báo cáo</button></div>
 		</div>
@@ -27,8 +28,8 @@
 					<!-- <button type="submit" class="btn btn-success" id="exportExcel" >
 						In Phiếu
 					  </button> -->
-					  <form action="/baoCao/export" method="POST">
-           					 <button class="btn btn-success" type="submit">Export To Excel</button>
+					  <form action="/baoCao/export" method="POST" id="form_export">
+           					<button class="btn btn-success" type="submit" >Export To Excel</button>
             			</form>
 			</div>
 			<br>
@@ -61,8 +62,8 @@
 			  </button>
 			</div>
 			<div class="modal-body"> 
-				<label>Từ ngày : </label><input type="text" name="startTime" id="startTime" maxlength="10" placeholder="VD: 1-2-2020">
-				<label>Đến ngày : </label><input type="text" name="finishTime" id="finishTime" maxlength="10" placeholder="VD: 3-2-2020">
+				<label>Từ ngày : </label><input type="text" name="startTime" id="startTime" maxlength="10" placeholder="VD: 01-02-2020">
+				<label>Đến ngày : </label><input type="text" name="finishTime" id="finishTime" maxlength="10" placeholder="VD: 03-02-2020">
 				<label>Tác vụ : </label><select name="action" id="action">
 					<option value="Nhập kho">Nhập kho</option>
 					<option value="Xuất kho">Xuất kho</option>

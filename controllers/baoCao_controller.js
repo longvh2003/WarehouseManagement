@@ -51,9 +51,9 @@ module.exports.xuatBaoCao = function (req, res) {
 }
 
 module.exports.Export_excel = function (req, res) {
-    var startTime = req.body.startTime;
-    var finishTime = req.body.finishTime;
-    var action = req.body.action;
+    var startTime = req.body.startTime_ex;
+    var finishTime = req.body.finishTime_ex;
+    var action = req.body.action_ex;
 
     var wb = XLSX.utils.book_new(); //new workbook
     lichSu.find({
@@ -69,11 +69,14 @@ module.exports.Export_excel = function (req, res) {
             var temp = JSON.stringify(data);
             temp = JSON.parse(temp);
             var ws = XLSX.utils.json_to_sheet(temp);
-            var down = 'E:/WarehouseManagement/publics/exportdata.xlsx';
+            var down = 'E:/WarehouseManagement/publics/data.xlsx';
            XLSX.utils.book_append_sheet(wb,ws,"sheet1");
            XLSX.writeFile(wb,down);
+           res.setHeader('Content-disposition', 'attachment; filename=data.xlsx');
+           res.setHeader('Content-type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
            res.download(down);
         }
     });
+    // console.log(startTime + " / " + finishTime + " / " + action);
 }
 
